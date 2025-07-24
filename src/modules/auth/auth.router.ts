@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { AuthController } from './auth.controller';
 import { validateBody } from '../../middlewares/validate.middleware';
 import { RegisterDTO } from './dto/register.dto'; // Assuming you have a DTO for registration
+import { LoginDto } from './dto/login.dto';
 
 export class AuthRouter {
   private router: Router;
@@ -14,10 +15,17 @@ export class AuthRouter {
   }
 
   private initializeRoutes() {
-    this.router.post('/register',
-        validateBody(RegisterDTO),
-         this.authController.register
-        );
+    this.router.post(
+      '/register',
+      validateBody(RegisterDTO),
+      this.authController.register
+    );
+    // Add other routes as needed
+    this.router.post(
+      '/login',
+      validateBody(LoginDto),
+      this.authController.login
+    );
     // Add other routes as needed
   }
 
